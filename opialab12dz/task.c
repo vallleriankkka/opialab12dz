@@ -1,30 +1,73 @@
-#include <locale.h>
-#include <stdio.h>
-#include <time.h>
+	#include <locale.h>
+	#include <stdio.h>
+	#include <time.h>
 
-struct tm* mytime;
-time_t t;
+	struct tm* mytime;
+	time_t t;
 
-int main()
-{
-    setlocale(LC_CTYPE, "");
+	void str_left(int len);
+	void str_right(int len);
+	int  lesson(char* buf);
+	int  time_now(char* buf, struct tm* tm);
 
-    t = time(NULL);
-    mytime = localtime(&t);
+	int main()
+	{
+		setlocale(LC_CTYPE, "");
 
-    char buf1[128];
-    char buf2[128];
+		t = time(NULL);
+		mytime = localtime(&t);
 
-    sprintf(buf1, "ћосковское врем€ %02d:%02d:%02d \n", mytime->tm_hour, mytime->tm_min, mytime->tm_sec);
+		char buf1[128];
+		int len1 = time_now(buf1, mytime);
 
-    int now_min = mytime->tm_hour * 60 + mytime->tm_min;
-    int start_min = 8 * 60 + 30;
-    int diff = now_min - start_min;
+		for (int i = 0; i < 78; i++) putchar('*'); // пробелы в начале
+		putchar('\n');
 
-    sprintf(buf2, "— первой пары прошло %02d часов %02d минут\n", diff / 60, diff % 60);
+		str_left(len1);
+		printf(buf1);
 
-    printf(buf1);
-    printf(buf2);
+		str_right(len1);
 
-    return 0;
-}
+		char buf2[128];
+		int diff = 0;
+		int len2 = lesson(buf2);
+		str_left(len2);
+		printf(buf2);
+
+		str_right(len2);
+
+		for (int i = 0; i < 78; i++) putchar('*'); // пробелы в конце
+		putchar('\n');
+
+
+		return 0;
+	}
+
+	void str_left(int len)
+	{
+		putchar('*');
+		for (int i = 0; i < (78 - len) / 2; i++) putchar(' ');        /* пробелы слева */
+	}
+
+
+	void str_right(int len)
+	{
+		for (int i = 0; i < 78 - len - (78 - len) / 2; i++) putchar(' '); /* справа */
+		putchar('*');
+		putchar('\n');      /* пробелы слева */
+	}
+
+	int lesson(char* buf)
+	{
+		int now_min = mytime->tm_hour * 60 + mytime->tm_min;
+		int start_min = 8 * 60 + 30;
+		int diff = now_min - start_min;
+
+		return sprintf(buf, "— первой пары прошло %02d часов %02d минут", diff / 60, diff % 60);
+	}
+
+
+	int time_now(char* buf, struct tm* mytime)
+	{
+		return sprintf(buf, "ћосковское врем€ %02d:%02d:%02d", mytime->tm_hour, mytime->tm_min, mytime->tm_sec);
+	}
