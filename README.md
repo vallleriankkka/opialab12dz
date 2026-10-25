@@ -28,7 +28,7 @@
 		char buf1[128];
 		int len1 = time_now(buf1, mytime);
 
-		for (int i = 0; i < 78; i++) putchar('*'); // пробелы в начале
+		for (int i = 0; i < 78; i++) putchar('*'); // начало
 		putchar('\n');
 
 		str_left(len1);
@@ -44,7 +44,7 @@
 
 		str_right(len2);
 
-		for (int i = 0; i < 78; i++) putchar('*'); // пробелы в конце
+		for (int i = 0; i < 78; i++) putchar('*'); // конец
 		putchar('\n');
 
 
@@ -54,15 +54,15 @@
 	void str_left(int len)
 	{
 		putchar('*');
-		for (int i = 0; i < (78 - len) / 2; i++) putchar(' ');        /* пробелы слева */
+		for (int i = 0; i < (78 - len) / 2; i++) putchar(' ');        // слева
 	}
 
 
 	void str_right(int len)
 	{
-		for (int i = 0; i < 78 - len - (78 - len) / 2; i++) putchar(' '); /* справа */
+		for (int i = 0; i < 74 - len - (74 - len) / 2; i++) putchar(' '); // справа
 		putchar('*');
-		putchar('\n');      /* пробелы слева */
+		putchar('\n');    
 	}
 
 	int lesson(char* buf)
