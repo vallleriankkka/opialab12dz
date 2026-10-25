@@ -52,7 +52,7 @@
 
 	void str_right(int len)
 	{
-		for (int i = 0; i < 78 - len - (78 - len) / 2; i++) putchar(' '); /* справа */
+		for (int i = 0; i < 74 - len - (74 - len) / 2; i++) putchar(' '); /* справа */
 		putchar('*');
 		putchar('\n');      /* пробелы слева */
 	}
